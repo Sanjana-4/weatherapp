@@ -1,12 +1,14 @@
 import React from 'react'
-import { useHistory } from 'react-router-dom'
+import { BrowserRouter as Router, useHistory } from 'react-router-dom'
+
 
 function Weather() {
     const history = useHistory();
-    const handleRoute = () => {
-        history.push('/winfo');
+    const handleHistory = () => {
+        history.push("/Winfo");
     }
     return (
+    
         <div>
             <center>
                 <div className="weather">
@@ -17,11 +19,12 @@ function Weather() {
                 <option selected value="pune">Pune</option>
                 <option value ="delhi">Delhi</option>
                 </select>
-                <button onClick={handleRoute}>Get Weather</button>
+                <button onClick={handleHistory}>Get Weather</button>
 
                 </div>
             </center>
         </div>
+
     )
 }
 export default Weather

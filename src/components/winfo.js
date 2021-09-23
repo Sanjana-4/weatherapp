@@ -1,9 +1,16 @@
 import React from 'react'
-function winfo() {
-    return(
+import { useHistory } from 'react-router-dom'
+
+const Winfo = () => {
+    let history = useHistory();
+    const goToPreviousPath = () => {
+        history.goBack()
+    }
+    return (
         <div>
-            hello
+        <button onClick={goToPreviousPath}>Go back</button>
         </div>
     )
 }
-export default winfo
+
+export default Winfo
