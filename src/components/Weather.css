@@ -1,0 +1,59 @@
+.weather{
+    text-align: center;
+    background-image: url("https://englishlive.ef.com/blog/wp-content/uploads/sites/2/2014/12/1_Winter-weather-in-English_-7-expressions-you-need-to-know_amends.jpg");
+    position: fixed;
+    min-width: 100%;
+    min-height: 100%;
+    background-size: cover;
+    background-position: center;
+}
+.button{
+  background-color: black;
+  border: 1px solid white;
+  color: white;
+  width:200px;
+  padding: 10px 22px;
+  align-items: center;
+  text-align: center;
+  display: inline-block;
+  text-decoration: none;
+  font-size: 16px;
+  border-radius: 12px;
+  margin-left: 2vh;
+  margin-top: 20px;
+  box-shadow: 7px 7px 20px rgb(17, 9, 9),
+  -7px -7px 20px rgb(17, 9, 9);
+}
+.weath_dropdown{
+    background-color: black;
+    border: 1px solid white;
+    width:200px;
+    color: white;
+    padding: 10px 22px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 12px;
+    margin-left: 2vh;
+    align-items: center;
+    border: 2px solid white;
+    box-shadow: 7px 7px 20px rgb(17, 9, 9),
+    -7px -7px 20px rgb(17, 9, 9);
+}
+.form {
+  border-radius: 8px;
+  width:480px;
+  height:300px;
+  padding: 16px 38px;
+  margin:100px;
+  display: inline-block;
+  box-shadow: 7px 7px 20px rgb(17, 9, 9),
+              -7px -7px 20px rgb(17, 9, 9);
+  align-items: center;
+  justify-content: center;
+}
+.form h2 {
+  font-size: 50px;
+  font-style: initial;
+}

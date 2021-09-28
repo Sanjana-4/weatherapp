@@ -3,6 +3,7 @@ import Weather from './components/Weather'
 import Winfo from './components/Winfo'
 import { BrowserRouter as Router,Switch,Route } from 'react-router-dom'
 
+
 function App() {
   return (
     <div>
@@ -13,6 +14,8 @@ function App() {
         </Switch>
       </Router>
     </div>
+   
+   
   );
 }
 

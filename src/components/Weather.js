@@ -1,28 +1,56 @@
-import React from 'react'
-import { BrowserRouter as Router, useHistory } from 'react-router-dom'
+import React,{useState} from 'react'
+import { useHistory } from 'react-router-dom'
+import './Weather.css'
+
+
+
 
 
 function Weather() {
+      
+
     const history = useHistory();
-    const handleHistory = () => {
-        history.push("/Winfo");
+    const handleHistory = (e) => {
+        e.preventDefault();
+        history.push({
+            
+            pathname: '/Winfo',
+            state: city
+            
+        });
+        
+        
     }
+    const [city,setCity]=useState();
+
+
+   
+    
+    
     return (
     
-        <div>
+        <div className="weather">
             <center>
-                <div className="weather">
-                <h2 claasName="weather-title">Weather App</h2>
-                <select>
-                <option value ="Chennai">Chennai</option>
-                <option value ="mumbai">Mumbai</option>
-                <option selected value="pune">Pune</option>
-                <option value ="delhi">Delhi</option>
+            <form className="form">
+                   <h2>Weather Forecast 🌧   </h2>
+                 <select className="weath_dropdown" onChange={e=>setCity(e.target.value)} value={city}>
+                 
+                <option>Chennai</option>
+                <option>Mumbai</option>
+                <option>Pune</option>
+                <option>Delhi</option>
+                <option>Bangalore</option>
                 </select>
-                <button onClick={handleHistory}>Get Weather</button>
-
-                </div>
+                <br/>
+                
+                <button className="button" onClick={handleHistory} >Get Weather</button>
+                
+                </form>
             </center>
+            <div>
+            
+           
+            </div>
         </div>
 
     )
