@@ -87,16 +87,25 @@ padding-left:30px;
 .symbol{
     font-size: 60px;
 }
-.error{
-    padding-top: 200px;
-    font-size: 30px;
+.error_card{
+    border-radius: 8px;
+    width:480px;
+    height:320px;
+    padding: 16px 38px;
+    margin:200px;
+    margin-left: 370px;
+    display: inline-block;
+    box-shadow: 7px 7px 20px rgb(247, 245, 245),
+                -7px -7px 20px rgb(204, 189, 189);
+   border-radius: 100px;
+  
 }
-.error_btn{
-    background: none;
-    width:120px;
-    height:30px;
-    border: 2px solid white;
-    border-radius: 12px;
-    color:white;
-    font-size: 20px;
+.error{
+   font-weight: 500;
+   font-size: 200px;
+   
+}
+.error_msg{
+  font-size: 20px;
+  font-weight: 500;
 }
