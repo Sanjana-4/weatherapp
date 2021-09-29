@@ -1,0 +1,103 @@
+.img{
+    background-image: url("https://api.time.com/wp-content/uploads/2016/09/weather-17.jpg");
+    position: fixed;
+    min-width: 100%;
+    min-height: 100%;
+    background-size: cover;
+    background-position: center;
+    color: white;
+}
+.btn{
+    background: none;
+    width:120px;
+    height:30px;
+    margin-left: 90%;
+    margin-top: 20px;
+    border: 1px solid white;
+    border-radius: 12px;
+    color:white;
+    font-size: 20px;
+
+
+}
+.name{
+font-size: 40px;
+padding-top: 20px;
+padding-left: 30px;
+
+}
+.temp{
+font-size: 250px;
+width:20%;
+float:left;
+padding-left:30px;
+
+
+}
+.temp_symbol{
+    font-size: 80px;
+    padding-left: 50px;
+    margin:100;
+    width: 19%;
+    float:left;
+    padding-top: 40px;
+}  
+
+.moreinfo1{
+    width:25%;
+    float:left;
+    font-size: 30px;
+    padding-top: 5px;
+}
+.moreinfo2{
+    width:25%;
+    float:right;
+    font-size: 30px;
+    font-size: 30px;
+    padding-top: 137px;
+}
+
+.description{
+ font-size:50px ;
+ padding-bottom: 20px;
+}
+.dailyweather{
+    padding-left: 30px;
+    font-size: 40px;
+    margin-top: 320px;
+}
+.card {
+    border-radius: 8px;
+    width:22.6%;
+    height:300px;
+    box-shadow: 7px 7px 20px rgb(17, 9, 9),
+                -7px -7px 20px rgb(17, 9, 9);
+    float: left;
+    margin:10px;
+    margin-top: 30px;
+    margin-right: 20px;
+    text-align: center;
+    font-size: 25px;
+    padding-top: 10px;
+    font-weight: 700;
+  }
+.size{
+    font-weight: 400;
+    font-size: 60px;
+}
+.symbol{
+    font-size: 60px;
+}
+.error{
+    padding-top: 200px;
+    font-size: 30px;
+}
+.error_btn{
+    background: none;
+    width:120px;
+    height:30px;
+    border: 2px solid white;
+    border-radius: 12px;
+    color:white;
+    font-size: 20px;
+}

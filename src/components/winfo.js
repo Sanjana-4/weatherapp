@@ -1,6 +1,6 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
-import './Weather.css'
+import './ApiData.css';
 import ApiData from './ApiData';
 const Winfo = () => {
 
@@ -14,10 +14,10 @@ const Winfo = () => {
     
 
     return (
-        <div>
-        <ApiData/>
-        <button onClick={goToPreviousPath}>Go back</button>
+        <div className="img">
         
+        <button className="btn" onClick={goToPreviousPath}>Go back</button>
+        <ApiData/>
         </div>
     )
 }
