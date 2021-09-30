@@ -11,7 +11,7 @@ function ApiData() {
     }, [location]);
 
 
-    const APIKEY = "6811337247b529b1ed34445a7f939523";
+    const APIKEY = "405b769039cf1b61415b5a86c87bf5b0";
     const [data,setData]=useState([]);
     
         fetch (`http://api.openweathermap.org/data/2.5/weather?q=${location.state}&appid=${APIKEY}`)
@@ -77,8 +77,10 @@ function ApiData() {
         </div>
         </React.Fragment>
         ) : (
-<div>
-  <center>{data.message}</center>
+<div className="error_card">
+<center>
+<div className="error">404</div>
+  <div className="error_msg">{data.message}</div></center>
 </div>
 )}
         </div> 
