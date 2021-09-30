@@ -6,21 +6,23 @@ function ApiData() {
     const location = useLocation();
 
     useEffect(() => {
-       console.log(location.pathname); 
        console.log(location.state); 
     }, [location]);
 
 
     const APIKEY = "405b769039cf1b61415b5a86c87bf5b0";
     const [data,setData]=useState([]);
-    
+    const weatherdata = ()=>{
         fetch (`http://api.openweathermap.org/data/2.5/weather?q=${location.state}&appid=${APIKEY}`)
         .then((response)=> response.json())
         .then((json)=>{
             console.log(json);
             setData(json);
         })
-   
+    }
+    useEffect(() => {
+        weatherdata()
+    }, [])
     return (
       <div>
       <div>
