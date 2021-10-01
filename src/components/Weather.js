@@ -1,8 +1,8 @@
-import React,{useState,useEffect} from 'react'
-import { useHistory , useLocation} from 'react-router-dom'
+import React,{useState} from 'react'
+import { useHistory } from 'react-router-dom'
 import './Weather.css'
-import Winfo from './Winfo';
-import Model from './Model'
+
+
 
 
 
@@ -41,13 +41,7 @@ function Weather() {
             setData(json);
          })
     }
-    const result=()=>{
-        
-           if(data.cod ===200){handleHistory()}
-       else{
-           alert("something went wrong")
-       }    
-    }
+   
  
    
     
@@ -58,7 +52,7 @@ function Weather() {
             <center>
             <form  className="form" onSubmit={(e)=>weatherdata(e)}   >
                    <h2>Weather Forecast 🌧   </h2>
-                 <select id="city" className="weath_dropdown" onChange={e=>(e.target.value)} >
+                 <select id="city" className="weath_dropdown" onChange={(e)=>weatherdata(e)} value={('city').value} >
                  <option hidden value = "Select City">Select City</option>
                 <option value="chennai">Chennai</option>
                 <option value="Mumbai">Mumbai</option>
@@ -67,13 +61,17 @@ function Weather() {
                 <option value="Bangalore">Bangalore</option>
                 </select>
                 <br/>
-                <button className="button" type="form" onClick={(e)=>{
+                <button className="button" onClick={(e)=>{
                     var err = document.getElementById('city').value;
                    if(err === "Select City"){
                     alert ("Select city");
                     
+                    
                 }
-                else{result()}
+                else if(data.cod !== 200){
+                    alert("something went wrong")
+                }
+                else{handleHistory(e)}
                  }}>Get Weather</button>
                      
                 </form>

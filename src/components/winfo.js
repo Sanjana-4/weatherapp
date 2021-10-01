@@ -39,8 +39,7 @@ const Winfo = () => {
         <button className="btn" onClick={goToPreviousPath}>Go back</button>
         <div>
       <div>
-{location.data.cod === 200 ? (
-    <React.Fragment>
+
     <div className="name">{location.data.name},{location.data.sys&&location.data.sys.country}</div>
 
     
@@ -90,14 +89,7 @@ const Winfo = () => {
           </div>
           </div>
         </div>
-        </React.Fragment>
-        ) : (
-<div className="error_card">
-<center>
-<div className="error">404</div>
-  <div className="error_msg">{location.data.message}</div></center>
-</div>
-)}
+       
         </div> 
        
       </div>
