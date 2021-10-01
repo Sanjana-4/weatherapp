@@ -8,10 +8,11 @@ function ApiData() {
     useEffect(() => {
       console.log(location.pathname); 
       console.log(location.state); 
+      console.log(location.data);
     }, [location]);
 
 
-    const APIKEY = "ea97e52c3dd933f4e06a02012713596a";
+    /*const APIKEY = "ea97e52c3dd933f4e06a02012713596a";
     const [data,setData]=useState([]);
     const weatherdata = ()=>{
         fetch (`http://api.openweathermap.org/data/2.5/weather?q=${location.state}&appid=${APIKEY}`)
@@ -23,30 +24,30 @@ function ApiData() {
     }
     useEffect(() => {
         weatherdata()
-    }, [])
+    }, [])*/
     return (
       <div>
       <div>
-{data.cod === 200 ? (
+{location.data.cod === 200 ? (
     <React.Fragment>
-    <div className="name">{data.name},{data.sys&&data.sys.country}</div>
+    <div className="name">{location.data.name},{location.data.sys&&location.data.sys.country}</div>
 
     
-       <div className="temp">{Math.floor(data.main&&data.main.temp - 273.15)}</div>
+       <div className="temp">{Math.floor(location.data.main&&location.data.main.temp - 273.15)}</div>
        <div className="temp_symbol">°C</div>
        <div className="moreinfo1">
-         <div className="description">{data.weather&&data.weather[0].description} 🔆 </div>
+         <div className="description">{location.data.weather&&location.data.weather[0].description} 🔆 </div>
          <br/>
-         <div className="feelslike">Feels Like {Math.floor(data.main&&data.main.feels_like - 273.15)}°</div>
-         <div className="pressure">pressure {data.main&&data.main.pressure} hPa</div>
-         <div className="humidity">Humidity {data.main&&data.main.humidity}%</div>
+         <div className="feelslike">Feels Like {Math.floor(location.data.main&&location.data.main.feels_like - 273.15)}°</div>
+         <div className="pressure">pressure {location.data.main&&location.data.main.pressure} hPa</div>
+         <div className="humidity">Humidity {location.data.main&&location.data.main.humidity}%</div>
       </div>
       <div className="moreinfo2">
-      <div className="description">{new Date(data.dt * 1000).toLocaleTimeString()}  </div>
+      <div className="description">{new Date(location.data.dt * 1000).toLocaleTimeString()}  </div>
          <br/>
-         <div className="wind">wind ➤ {Math.floor((data.wind&&data.wind.speed * 18) / 5)} km/hr</div>
-         <div className="visibility">visibility {data.visibility / 1000} Km</div>
-         <div className="degree">Wind Direction {data.wind&&data.wind.deg}°</div>
+         <div className="wind">wind ➤ {Math.floor((location.data.wind&&location.data.wind.speed * 18) / 5)} km/hr</div>
+         <div className="visibility">visibility {location.data.visibility / 1000} Km</div>
+         <div className="degree">Wind Direction {location.data.wind&&location.data.wind.deg}°</div>
       </div>
       <br/>
       <div className="dailyweather">More Information</div>
@@ -55,26 +56,26 @@ function ApiData() {
           <div className="card">Max-Temp
           <div className="symbol">🌣</div>
           <div className="size">
-          <div>{Math.floor(data.main&&data.main.temp_max - 273.15)}</div>
+          <div>{Math.floor(location.data.main&&location.data.main.temp_max - 273.15)}</div>
           </div>
           </div>
           
           <div className="card">Min-Temp
           <div className="symbol">☼</div>
           <div className="size">
-          <div>{Math.floor(data.main&&data.main.temp_min - 273.15)}</div>
+          <div>{Math.floor(location.data.main&&location.data.main.temp_min - 273.15)}</div>
           </div>
           </div>
           <div className="card">Sunrise
           <div className="symbol">🌤</div>
           <div className="size">
-          <div>{new Date(data.sys&&data.sys.sunrise * 1000).toLocaleTimeString()}</div>
+          <div>{new Date(location.data.sys&&location.data.sys.sunrise * 1000).toLocaleTimeString()}</div>
           </div>
           </div>
           <div className="card">Sunset
           <div className="symbol">🌥</div>
           <div className="size">
-          <div>{new Date(data.sys&&data.sys.sunset * 1000).toLocaleTimeString()}</div>
+          <div>{new Date(location.data.sys&&location.data.sys.sunset * 1000).toLocaleTimeString()}</div>
           </div>
           </div>
         </div>
@@ -83,7 +84,7 @@ function ApiData() {
 <div className="error_card">
 <center>
 <div className="error">404</div>
-  <div className="error_msg">{data.message}</div></center>
+  <div className="error_msg">{location.data.message}</div></center>
 </div>
 )}
         </div> 
