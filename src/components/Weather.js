@@ -1,76 +1,83 @@
-import React,{useState} from 'react'
-import { useHistory } from 'react-router-dom'
-import './Weather.css'
-import 'react-toastify/dist/ReactToastify.css'
+import React from "react";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import { GetWeatherDetails } from "../Redux/Actions";
 import { ToastContainer,toast } from 'react-toastify'
-
-
-
+import 'react-toastify/dist/ReactToastify.css'
+import { useHistory } from 'react-router-dom'
+import { BrowserRouter as Router,Switch,Route } from 'react-router-dom'
+import './Weather.css'
 const customId = "custom-id-yes";
 
 toast.configure()
-function Weather() {
-      
-    
-    const history = useHistory();
-    function handleHistory () {
-      
-        var err = document.getElementById('city').value;
-       
-        history.push({
-            
-            pathname: '/Winfo',
-            state: err,
-            data: data
-            
-        });
-        
-        
-    }
-    
 
+class Weather extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchInput: ""
+    };
+  }
 
-    const APIKEY = "ea97e52c3dd933f4e06a02012713596a";
-    const [data,setData]=useState([]);
-    const city = useState(('city').value)
-    const weatherdata = (e)=>{
-        e.preventDefault()
-        var err = document.getElementById('city').value;
-        fetch (`http://api.openweathermap.org/data/2.5/weather?q=${err}&appid=${APIKEY}`)
-        .then((response)=> response.json())
-        .then((json)=>{
-          
-            console.log(json);
-            setData(json);
-         })
-    }
+//   componentDidMount= e =>{
+//    e.preventDefault();
+//    const { GetWeatherDetails } = this.props.action;
+//    GetWeatherDetails();
+//  }
+ handleSubmit = e => {
+  e.preventDefault();
+  const { searchInput } = this.state;
+  const { GetWeatherDetails } = this.props.action;
+  if (searchInput) GetWeatherDetails(this.state.searchInput);
+  this.setState({ searchInput: "" });
+};
+handleOnChange = e => {
+  e.preventDefault();
+  this.setState({
+    searchInput: e.target.value
+  });
+};
+handleChange = e => {
+  e.preventDefault();
+  
+    this.props.history.push({
+        pathname: '/Winfo',
+        
+      })
+}
+
+ 
+  render() {
 
     const notify = () =>{
-    toast.warning('Select Valid City',{
-        toastId: customId
+        toast.warning('Select Valid City',{
+            toastId: customId
+    
+    
+            });
+        }
+        
+            const diffToast = () => {
+                toast.error('Something went wrong',{
+                    toastId:customId
+            });
+        }
 
+       
+       
 
-        });
-    }
-    
-        const diffToast = () => {
-            toast.error('Something went wrong',{
-                toastId:customId
-        });
-    }
-    
+    const { data, SUCCESS , PENDING} = this.props.weatherData;
+    const {  cod } = data;
+    const { searchInput } = this.state;
    
- 
-   
-    
-    
+
     return (
-    
-        <div className="weather">
+      
+           <div className="weather">
             <center>
-            <form  className="form" onSubmit={(e)=>weatherdata(e)}   >
+            <form  className="form" onSubmit={(e)=>this.handleSubmit(e)}   >
                    <h2>Weather Forecast 🌧   </h2>
-                 <select id="city" className="weath_dropdown" onChange={(e)=>weatherdata(e)} value={('city').value} >
+                 <select id="city" className="weath_dropdown" onChange={(e)=>this.handleOnChange(e)} value={searchInput} >
                  <option hidden value = "Select City">Select City</option>
                 <option value="chennai">Chennai</option>
                 <option value="Mumbai">Mumbai</option>
@@ -79,14 +86,7 @@ function Weather() {
                 <option value="Bangalore">Bangalore</option>
                 </select>
                 <br/>
-                <button className="button" onClick={(e)=>{
-                    var err = document.getElementById('city').value;
-                   if(err === "Select City")
-                   {notify()}
-                else if(data.cod !== 200)
-                {diffToast()}
-                else{handleHistory(e)}
-                 }}>Get Weather</button>
+                <button className="button" onClick={(e)=>this.handleChange(e)}>Get Weather</button>
             <ToastContainer/>
                 </form>
             </center>
@@ -95,7 +95,18 @@ function Weather() {
            
             </div>
         </div>
-
-    )
+    );
+  }
 }
-export default Weather
+ 
+
+const mapStateToProps = state => ({
+  weatherData: state
+});
+
+const mapDispatchToProps = dispatch => ({
+  action: bindActionCreators({ GetWeatherDetails }, dispatch)
+});
+
+ 
+export default connect(mapStateToProps, mapDispatchToProps)(Weather);

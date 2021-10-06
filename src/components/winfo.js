@@ -1,63 +1,77 @@
 import React,{useState,useEffect} from 'react'
 import { useHistory,useLocation } from 'react-router-dom'
 import './ApiData.css';
-const Winfo = () => {
+import { connect } from "react-redux";
+class Winfo extends React.Component {
 
 
 
 
-    let history = useHistory();
-    const goToPreviousPath = () => {
-        history.goBack()
-    }
+  //  let history = useHistory();
+  //   const goToPreviousPath = () => {
+  //       history.goBack()
+  //   }
     
-    const location = useLocation();
+  //   const location = useLocation();
 
-    useEffect(() => {
-      console.log(location.pathname); 
-      console.log(location.data); 
-    }, [location]);
+  //   useEffect(() => {
+  //     console.log(location.pathname); 
+  //     console.log(location.data); 
+  //   }, [location]);
 
 
-   /* const APIKEY = "ea97e52c3dd933f4e06a02012713596a";
-    const [data,setData]=useState([]);
-    const weatherdata = ()=>{
-        fetch (`http://api.openweathermap.org/data/2.5/weather?q=${location.state}&appid=${APIKEY}`)
-        .then((response)=> response.json())
-        .then((json)=>{
-            console.log(json);
-            setData(json);
+  //   const APIKEY = "ea97e52c3dd933f4e06a02012713596a";
+  //   const [data,setData]=useState([]);
+  //   const weatherdata = ()=>{
+  //       fetch (`http://api.openweathermap.org/data/2.5/weather?q=${location.state}&appid=${APIKEY}`)
+  //       .then((response)=> response.json())
+  //       .then((json)=>{
+  //           console.log(json);
+  //           setData(json);
+  //       })
+  //   }
+  //   useEffect(() => {
+  //       weatherdata()
+  //   }, []) 
+
+    handleChange = e => {
+      e.preventDefault();
+      this.props.history.push({
+          pathname: '/',
+          
         })
-    }
-    useEffect(() => {
-        weatherdata()
-    }, []) */
+  }
+   
+    render() {
+    
+    const { data } = this.props.weatherData;
+    const { weather, sys, name, main, dt, wind, visibility } = data;
 
     return (
         <div className="img">
         
-        <button className="btn" onClick={goToPreviousPath}>Go back</button>
+        <button className="btn" onClick={(e)=>this.handleChange(e)}>Go back</button>
         <div>
       <div>
 
-    <div className="name">{location.data.name},{location.data.sys&&location.data.sys.country}</div>
+    <div className="name">{name},{sys.country}</div>
 
     
-       <div className="temp">{Math.floor(location.data.main&&location.data.main.temp - 273.15)}</div>
+       <div className="temp">{Math.floor(main.temp )}</div>
        <div className="temp_symbol">°C</div>
        <div className="moreinfo1">
-         <div className="description">{location.data.weather&&location.data.weather[0].description} 🔆 </div>
+         <div className="description">{weather[0].description} 🔆 </div>
          <br/>
-         <div className="feelslike">Feels Like {Math.floor(location.data.main&&location.data.main.feels_like - 273.15)}°</div>
-         <div className="pressure">pressure {location.data.main&&location.data.main.pressure} hPa</div>
-         <div className="humidity">Humidity {location.data.main&&location.data.main.humidity}%</div>
+         <div className="feelslike">Feels Like {Math.floor(main.feels_like )}°</div>
+         <div className="pressure">pressure {main.pressure} hPa</div>
+         <div className="humidity">Humidity {main.humidity}%</div>
       </div>
       <div className="moreinfo2">
-      <div className="description">{new Date(location.data.dt * 1000).toLocaleTimeString()}  </div>
+      <div className="description">{new Date(dt * 1000).toLocaleTimeString()}  </div>
          <br/>
-         <div className="wind">wind ➤ {Math.floor((location.data.wind&&location.data.wind.speed * 18) / 5)} km/hr</div>
-         <div className="visibility">visibility {location.data.visibility / 1000} Km</div>
-         <div className="degree">Wind Direction {location.data.wind&&location.data.wind.deg}°</div>
+         <div className="wind">wind ➤ {Math.floor((wind.speed * 18) / 5)} km/hr</div>
+         <div className="visibility">visibility {visibility / 1000} Km</div>
+         <div className="degree">Wind Direction {wind.deg}°</div>
       </div>
       <br/>
       <div className="dailyweather">More Information</div>
@@ -66,26 +80,26 @@ const Winfo = () => {
           <div className="card">Max-Temp
           <div className="symbol">🌣</div>
           <div className="size">
-          <div>{Math.floor(location.data.main&&location.data.main.temp_max - 273.15)}</div>
+          <div>{Math.floor(main.temp_max )}</div>
           </div>
           </div>
           
           <div className="card">Min-Temp
           <div className="symbol">☼</div>
           <div className="size">
-          <div>{Math.floor(location.data.main&&location.data.main.temp_min - 273.15)}</div>
+          <div>{Math.floor(main.temp_min )}</div>
           </div>
           </div>
           <div className="card">Sunrise
           <div className="symbol">🌤</div>
           <div className="size">
-          <div>{new Date(location.data.sys&&location.data.sys.sunrise * 1000).toLocaleTimeString()}</div>
+          <div>{new Date(sys.sunrise * 1000).toLocaleTimeString()}</div>
           </div>
           </div>
           <div className="card">Sunset
           <div className="symbol">🌥</div>
           <div className="size">
-          <div>{new Date(location.data.sys&&location.data.sys.sunset * 1000).toLocaleTimeString()}</div>
+          <div>{new Date(sys.sunset * 1000).toLocaleTimeString()}</div>
           </div>
           </div>
         </div>
@@ -96,6 +110,9 @@ const Winfo = () => {
        
         </div>
     )
+    }
 }
-
-export default Winfo
+const mapStateToProps = state => ({
+  weatherData: state
+});
+export default connect(mapStateToProps)(Winfo);
