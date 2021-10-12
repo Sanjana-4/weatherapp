@@ -22,8 +22,9 @@ export const WeatherReducer = (state = WeatherInitialState, action) => {
         success: true,
         data: action.payload
       };
-    
+      
     default:
       return state;
   }
+  
 };

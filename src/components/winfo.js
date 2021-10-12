@@ -4,36 +4,6 @@ import './ApiData.css';
 import { connect } from "react-redux";
 class Winfo extends React.Component {
 
-
-
-
-  //  let history = useHistory();
-  //   const goToPreviousPath = () => {
-  //       history.goBack()
-  //   }
-    
-  //   const location = useLocation();
-
-  //   useEffect(() => {
-  //     console.log(location.pathname); 
-  //     console.log(location.data); 
-  //   }, [location]);
-
-
-  //   const APIKEY = "ea97e52c3dd933f4e06a02012713596a";
-  //   const [data,setData]=useState([]);
-  //   const weatherdata = ()=>{
-  //       fetch (`http://api.openweathermap.org/data/2.5/weather?q=${location.state}&appid=${APIKEY}`)
-  //       .then((response)=> response.json())
-  //       .then((json)=>{
-  //           console.log(json);
-  //           setData(json);
-  //       })
-  //   }
-  //   useEffect(() => {
-  //       weatherdata()
-  //   }, []) 
-
     handleChange = e => {
       e.preventDefault();
       this.props.history.push({

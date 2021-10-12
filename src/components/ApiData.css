@@ -21,16 +21,16 @@
 
 }
 .name{
-font-size: 40px;
-padding-top: 20px;
-padding-left: 30px;
+    font-size: 40px;
+    padding-top: 20px;
+    padding-left: 30px;
 
 }
 .temp{
-font-size: 250px;
-width:20%;
-float:left;
-padding-left:30px;
+    font-size: 250px;
+    width:20%;
+    float:left;
+    padding-left:30px;
 
 
 }
@@ -58,8 +58,8 @@ padding-left:30px;
 }
 
 .description{
- font-size:50px ;
- padding-bottom: 20px;
+    font-size:50px ;
+    padding-bottom: 20px;
 }
 .dailyweather{
     padding-left: 30px;
@@ -98,17 +98,17 @@ padding-left:30px;
     display: inline-block;
     box-shadow: 7px 7px 20px rgb(247, 245, 245),
                 -7px -7px 20px rgb(204, 189, 189);
-   border-radius: 100px;
+    border-radius: 100px;
   
 }
 .error{
-   font-weight: 500;
-   font-size: 100px;
+    font-weight: 500;
+    font-size: 100px;
    
 }
 .error_msg{
-  font-size: 20px;
-  font-weight: 500;
+    font-size: 20px;
+    font-weight: 500;
 }
 @media (max-width:1440px){
 .img{
