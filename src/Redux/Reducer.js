@@ -1,6 +1,6 @@
 import { GET_WEATHER } from "./Constants";
 const WeatherInitialState = {
-  loading: false,
+  pending: false,
   success: false,
   data: {}
 };
@@ -11,7 +11,7 @@ export const WeatherReducer = (state = WeatherInitialState, action) => {
     case GET_WEATHER.PENDING:
       return {
         ...state,
-       loading: true
+       loading: false
       };
     case GET_WEATHER.SUCCESS:
      // console.log(JSON.stringify(action.payload))
@@ -22,9 +22,15 @@ export const WeatherReducer = (state = WeatherInitialState, action) => {
         success: true,
         data: action.payload
       };
-      
-    default:
-      return state;
-  }
+      case GET_WEATHER.FAILURE:
+        return {
+          ...state,
+          error: true
+        };
+      default:
+        return state;
+    }
+   
   
 };
+export default (WeatherReducer)

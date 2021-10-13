@@ -1,47 +1,59 @@
-import React,{useState,useEffect} from 'react'
-import { useHistory,useLocation } from 'react-router-dom'
-import './ApiData.css';
+import React from "react";
+import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-class Winfo extends React.Component {
+import { GetWeatherDetails } from "../Redux/Actions";
+import './ApiData.css';
 
-    handleChange = e => {
-      e.preventDefault();
-      this.props.history.push({
-          pathname: '/',
-          
-        })
+class Winfo extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      
+    };
   }
-   
-    render() {
-    
-    const { data } = this.props.weatherData;
+  componentWillReceiveProps= () =>{
+    GetWeatherDetails();
+  }
+
+  handleChange = e => {
+    e.preventDefault();
+    this.props.history.push({
+        pathname: '/',
+        
+      })
+}
+
+  render() {
+
+    const { data, success} = this.props.weatherData;
     const { weather, sys, name, main, dt, wind, visibility } = data;
 
+
     return (
-        <div className="img">
+<div className="img">
         
         <button className="btn" onClick={(e)=>this.handleChange(e)}>Go back</button>
         <div>
       <div>
 
-    <div className="name">{name},{sys.country}</div>
+    <div className="name">{name},{success ? sys.country : null}</div>
 
     
-       <div className="temp">{Math.floor(main.temp )}</div>
+       <div className="temp">{Math.floor(success ? main.temp : null )}</div>
        <div className="temp_symbol">°C</div>
        <div className="moreinfo1">
-         <div className="description">{weather[0].description} 🔆 </div>
+         <div className="description">{success ? weather[0].description : null} 🔆 </div>
          <br/>
-         <div className="feelslike">Feels Like {Math.floor(main.feels_like )}°</div>
-         <div className="pressure">pressure {main.pressure} hPa</div>
-         <div className="humidity">Humidity {main.humidity}%</div>
+         <div className="feelslike">Feels Like {Math.floor(success ? main.feels_like : null )}°</div>
+         <div className="pressure">pressure {success ? main.pressure : null} hPa</div>
+         <div className="humidity">Humidity {success ? main.humidity : null}%</div>
       </div>
       <div className="moreinfo2">
-      <div className="description">{new Date(dt * 1000).toLocaleTimeString()}  </div>
+      <div className="description">{success ? new Date (dt * 1000).toLocaleTimeString() : null }  </div>
          <br/>
-         <div className="wind">wind ➤ {Math.floor((wind.speed * 18) / 5)} km/hr</div>
-         <div className="visibility">visibility {visibility / 1000} Km</div>
-         <div className="degree">Wind Direction {wind.deg}°</div>
+         <div className="wind">wind ➤ {success ? Math.floor((wind.speed * 18) / 5) : null } km/hr</div>
+         <div className="visibility">visibility {success ? visibility / 1000  : null} Km</div>
+         <div className="degree">Wind Direction {success ? wind.deg : null}°</div>
       </div>
       <br/>
       <div className="dailyweather">More Information</div>
@@ -50,26 +62,26 @@ class Winfo extends React.Component {
           <div className="card">Max-Temp
           <div className="symbol">🌣</div>
           <div className="size">
-          <div>{Math.floor(main.temp_max )}</div>
+          <div>{Math.floor(success ? main.temp_max : null )}</div>
           </div>
           </div>
           
           <div className="card">Min-Temp
           <div className="symbol">☼</div>
           <div className="size">
-          <div>{Math.floor(main.temp_min )}</div>
+          <div>{Math.floor(success ? main.temp_min : null )}</div>
           </div>
           </div>
           <div className="card">Sunrise
           <div className="symbol">🌤</div>
           <div className="size">
-          <div>{new Date(sys.sunrise * 1000).toLocaleTimeString()}</div>
+          <div>{success ? new Date(sys.sunrise * 1000).toLocaleTimeString() : null }</div>
           </div>
           </div>
           <div className="card">Sunset
           <div className="symbol">🌥</div>
           <div className="size">
-          <div>{new Date(sys.sunset * 1000).toLocaleTimeString()}</div>
+          <div>{success ? new Date(sys.sunset * 1000).toLocaleTimeString() : null }</div>
           </div>
           </div>
         </div>
@@ -79,10 +91,17 @@ class Winfo extends React.Component {
       </div>
        
         </div>
-    )
-    }
+    );
+  }
 }
+
+
 const mapStateToProps = state => ({
   weatherData: state
 });
-export default connect(mapStateToProps)(Winfo);
+const mapDispatchToProps = dispatch => ({
+  action: bindActionCreators({ GetWeatherDetails }, dispatch)
+});
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(Winfo);

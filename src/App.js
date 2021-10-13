@@ -15,19 +15,17 @@ import WeatherStore from "./Redux/Store";
           window.location.href = "/";
         } 
   return (
+    <Provider store={WeatherStore}>
     <div>
-    
       <Router history={ window }>
         <Switch>
           <Route path='/' exact component={Weather}/>
           <Route path='/Winfo' component={Winfo}/>
         </Switch>
         </Router>
-        
     </div>
-   
-   
-  );
+    </Provider>
+);
 }
   }
 export default App;
