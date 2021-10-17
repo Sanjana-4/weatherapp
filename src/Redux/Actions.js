@@ -3,9 +3,28 @@ import axios from "axios";
 import { BASE_URL } from "../components/ApiConstants";
 
 
+async function GetWeather(location="") {
+  var responsev = {};
+  console.log("i am here")
+  await axios
+  .get(BASE_URL, {
+    params: {
+      q: location,
+      units: "Metric",
+      lang: "en"
+    }
+  })
+  .then((response) =>{
+    console.log(response);
+    responsev = response
+  });
+  return responsev;
+}
 
-export const GetWeatherDetails = (location="") => async dispatch => {
-    dispatch({ type: GET_WEATHER.PENDING });
+const GetWeatherDetails = (location="") => async dispatch => {
+    console.log(location);
+    //dispatch({ type: GET_WEATHER.PENDING });
+    console.log("making Request")
     axios
       .get(BASE_URL, {
         params: {
@@ -14,8 +33,17 @@ export const GetWeatherDetails = (location="") => async dispatch => {
           lang: "en"
         }
       })
-      .then(response =>
-        dispatch({ type: GET_WEATHER.SUCCESS, payload: response.data })
+      .then(response => {
+        console.log(response)
+        if(response.data != null){
+          dispatch({ type: GET_WEATHER.SUCCESS, payload: response.data });
+          return response
+        }
+        }
       )
+      console.log("done")
+      return {}
       
 };
+
+export {GetWeather, GetWeatherDetails};

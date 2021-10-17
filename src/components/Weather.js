@@ -1,15 +1,20 @@
 import React from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { GetWeatherDetails } from "../Redux/Actions";
+import { GetWeatherDetails, GetWeather} from "../Redux/Actions";
 import { ToastContainer,toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { GET_WEATHER } from "../Redux/Constants";
 import './Weather.css'
 const customId = "custom-id-yes";
 
 toast.configure()
 
+const handledipatch = () => async dispatch => {
+  return dispatch
+}
 class Weather extends React.Component {
+  
   constructor(props) {
     super(props);
     this.state = {
@@ -33,15 +38,24 @@ notify = () =>{
       });
   }
 
+
 async handleEvent (e) {
     e.preventDefault()
     const { searchInput } = this.state;
-    const { GetWeatherDetails } =  this.props.action;
+    const { GetWeatherDetails, handledipatch } =  this.props.action;
     
     if(searchInput === ""){this.notify()}
     e.preventDefault()
     if (searchInput !==""){
-     await GetWeatherDetails(this.state.searchInput);
+      await handledipatch().then(async (dispatch)=> {
+        dispatch({ type: GET_WEATHER.PENDING });
+        await GetWeather(this.state.searchInput).then((da)=>{
+          console.log(da);
+          dispatch({ type: GET_WEATHER.SUCCESS, payload: da.data });
+        })
+      })
+      //await GetWeather(this.state.searchInput);
+     //await GetWeatherDetails(this.state.searchInput).then(data=>{console.log(data)})
       this.setState({ searchInput: "" });
       
     const {data, success}=this.props.weatherData;
@@ -101,7 +115,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  action: bindActionCreators({ GetWeatherDetails }, dispatch)
+  action: bindActionCreators({ GetWeatherDetails, handledipatch }, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Weather);
